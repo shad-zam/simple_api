@@ -1,0 +1,23 @@
+---
+- name: create api directory
+  file:
+    path: /var/www/html/api/
+    state: directory
+    mode: '0755'
+    owner: ec2-user
+  become: true
+  become_user: root
+
+- name: setup php api file
+  template:
+    src: api.php.j2
+    dest: /var/www/html/api/index.php
+    mode: '0644'
+
+- debug: 
+    msg: 
+    - "API setup is complete you can access the api via below url"
+    - "{{ api_url }}"
+
+
+

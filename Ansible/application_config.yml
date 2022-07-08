@@ -1,0 +1,9 @@
+- name: Server Configurations 
+  hosts: app_hosts
+  gather_facts: true
+  remote_user: ec2-user
+  roles:
+   - app_svr_config
+   - db_setup
+   - api_setup
+  

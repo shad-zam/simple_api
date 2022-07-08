@@ -1,0 +1,40 @@
+---
+- name: Server Configuration
+  block:
+  - name: Upgrade all packages
+    yum: 
+      name: '*'
+      state: latest
+
+  - name: install required packages
+    yum: 
+      name: 
+        - httpd
+        - wget
+        - php-fpm
+        - php-mysqli
+        - php-json
+        - php
+        - php-devel
+        - mysql
+      state: latest
+
+  - name: start services
+    systemd:
+     name: "{{item}}"
+     state: started
+     enabled: yes
+    with_items:
+      - httpd
+      - php-fpm
+  
+  - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+    ansible.posix.seboolean:
+      name: httpd_can_network_connect
+      state: yes
+      persistent: yes
+
+    
+  become: true
+  become_user: root
+

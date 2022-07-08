@@ -1,0 +1,17 @@
+---
+- name: setup sql script
+  run_once: yes
+  template:
+    src: db_update.sh.j2
+    dest: /tmp/db_update.sh
+    mode: '0755'
+
+- name: run sql script to create table and input data
+  shell: "/tmp/db_update.sh 2>&1 | tee /tmp/db_update.sh.log"
+  register: command_output
+  run_once: yes
+  failed_when: (command_output.stdout.find("ERROR") != -1) or
+               (command_output.stdout.find("Permision denied") != -1) or
+               (command_output.stdout.find("command not found") != -1)
+
+
