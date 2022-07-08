@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  terraform-plan:
+    name: 'Terraform-plan'
     runs-on: ubuntu-latest
     environment: production
 
@@ -64,5 +64,29 @@ jobs:
     #   working-directory: ./Terraform
 
         # Generates an execution plan for Terraform
+
+  terraform-apply:
+    name: 'Terraform-apply'
+    runs-on: ubuntu-latest
+    needs: terraform-plan
+    environment: production
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: manual approval
+      if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+      uses: trstringer/manual-approval@v1
+        with:
+          approvers: shad-zam
+
+    - name: Terraform Apply
+      run: echo "running terraform apply"
+      # run: terraform apply -auto-approve -input=false
+      working-directory: ./Terraform
 
 
