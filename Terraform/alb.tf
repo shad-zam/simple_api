@@ -25,7 +25,7 @@ module "alb" {
   security_group_ids = [module.alb_sg.id]
   attach_target      = true
   target_instances   = module.ec2-app.id
-  instance_count     = var.instance_count
+  instance_count     = 2
 }
 
 output "loadbalancer_dns" {

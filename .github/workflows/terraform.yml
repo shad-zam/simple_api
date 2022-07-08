@@ -32,6 +32,10 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         cli_config_credentials_token: ${{ secrets.TF_CLOUD_API_TOKEN }}
+
+  # Install the latest version of Ansible
+    - name: Install Ansible
+      run: apt install ansible -y
     
     # List all the files
     - name: List files
@@ -58,3 +62,7 @@ jobs:
     #   if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
     #   run: terraform apply -auto-approve -input=false
     #   working-directory: ./Terraform
+
+        # Generates an execution plan for Terraform
+
+
