@@ -15,7 +15,7 @@ jobs:
   terraform-plan:
     name: 'Terraform-plan'
     runs-on: ubuntu-latest
-    environment: production
+    environment: test
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -84,9 +84,31 @@ jobs:
       with:
         approvers: shad-zam
 
-    - name: Terraform Apply
-      run: echo "running terraform apply"
-      # run: terraform apply -auto-approve -input=false
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_CLOUD_API_TOKEN }}
+
+  # Install the latest version of Ansible
+    - name: Install Ansible
+      run: sudo apt-get install ansible -y
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
       working-directory: ./Terraform
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve -input=false
+      working-directory: ./Terraform
+    
+    - name: Ansible setup
+      run: ansible-playbook -i inventory.tf --private-key eu-west2.pem application_config.yml
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      working-directory: ./Ansible
 
 
