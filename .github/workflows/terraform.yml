@@ -81,8 +81,8 @@ jobs:
     - name: manual approval
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       uses: trstringer/manual-approval@v1
-        with:
-          approvers: shad-zam
+      with:
+        approvers: shad-zam
 
     - name: Terraform Apply
       run: echo "running terraform apply"
