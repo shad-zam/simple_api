@@ -26,7 +26,8 @@ I have setup an github runner to automate the planning outputs. As this is a lea
 * clone this repository
 * Create a new key pair or copy your existing key pair file to 'Ansible' directory
 * goto Terraform directory
-* Update the configuration files as required ( vpc.tf , terraform.tf, app-svr.tf & alb.tf)
+* Remove backend & workspaces blocks from terraform.tf
+* Update the configuration files as required ( vpc.tf, app-svr.tf , alb.tf etc)
 * update the inventory.tpl line 19 with the new keypair name.
 * Run 'terraform init' to innitiate the terraform
 * Run 'terraform plan -out=terraform.provisionplan' eg- $ terraform plan -out=terraform.provisionplan 
