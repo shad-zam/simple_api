@@ -77,7 +77,6 @@ jobs:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
     - name: manual approval
       if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       uses: trstringer/manual-approval@v1
