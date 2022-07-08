@@ -35,7 +35,7 @@ jobs:
 
   # Install the latest version of Ansible
     - name: Install Ansible
-      run: apt install ansible -y
+      run: sudo apt-get install ansible -y
     
     # List all the files
     - name: List files
