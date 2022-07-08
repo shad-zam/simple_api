@@ -4,8 +4,8 @@ data "aws_ami" "ec2_ami" {
 
   filter {
     name = "name"
-    # values = ["CIS Amazon Linux 2 Kernel 5.10 Benchmark v1*"]
-    values = ["amzn2-ami-kernel-5.10-hvm-*-x86_64-gp2"]
+    values = ["al2022-ami-*-5.15-x86_64"]
+    
   }
 
 }

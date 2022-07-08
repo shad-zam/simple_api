@@ -20,7 +20,7 @@ data "aws_ami" "bastian_ami" {
 
   filter {
     name   = "name"
-    values = ["al2022-ami-*-5.15-x86_64"]
+    values = ["amzn2-ami-kernel-5.10-hvm-*-x86_64-gp2"]
   }
 
 }
