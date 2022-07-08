@@ -1,4 +1,14 @@
 terraform {
+  backend "remote" {
+        # The name of your Terraform Cloud organization.
+        organization = "shad_zam"
+
+        # The name of the Terraform Cloud workspace to store Terraform state files in.
+        workspaces {
+          name = "simple_api_gh_actions"
+        }
+      }
+      
   required_version = ">= 0.13.1"
 
   required_providers {
