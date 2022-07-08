@@ -3,7 +3,7 @@ data "aws_ami" "ec2_ami" {
   owners      = ["amazon"]
 
   filter {
-    name   = "name"
+    name = "name"
     # values = ["CIS Amazon Linux 2 Kernel 5.10 Benchmark v1*"]
     values = ["amzn2-ami-kernel-5.10-hvm-*-x86_64-gp2"]
   }
@@ -56,7 +56,7 @@ module "ec2-app" {
       volume_size = 8
     },
   ]
-   tags = {
+  tags = {
     Owner       = "Arshad"
     Environment = "non-prod"
     Inspector   = "common"
@@ -68,9 +68,9 @@ module "ec2-app" {
 module "app_svr_role" {
   source = "../terraform_modules/aws-iam_profile"
 
-  name = "app_svr_role"
+  name     = "app_svr_role"
   policies = ["AmazonSSMManagedInstanceCore"]
-  
+
 }
 
 # resource "aws_iam_role" "app_svr_role" {

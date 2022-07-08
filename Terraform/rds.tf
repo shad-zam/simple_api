@@ -39,11 +39,11 @@ module "mysql" {
 
 # output "endpoint" {
 #   value = module.mysql.db_instance_endpoint[0]
-  
+
 # }
 
 
 output "address" {
   value = module.mysql.db_instance_address[0]
-  
+
 }
