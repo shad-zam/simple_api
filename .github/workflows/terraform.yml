@@ -108,6 +108,7 @@ jobs:
     
     - name: Ansible setup
       run: ansible-playbook -i inventory.tf --private-key eu-west2.pem application_config.yml
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ./Ansible
 
 
