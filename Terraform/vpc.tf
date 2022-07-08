@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "../terraform_modules/aws-vpc"
+  source = "./terraform_modules/aws-vpc"
 
   create_vpc      = true
   name            = "swisscom"

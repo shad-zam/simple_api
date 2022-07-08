@@ -11,7 +11,7 @@ data "aws_ami" "ec2_ami" {
 }
 
 module "app_svr_sg" {
-  source      = "../terraform_modules/aws-sg"
+  source      = "./terraform_modules/aws-sg"
   name        = "app-server-sg"
   description = "application server sg"
   vpc_id      = module.vpc.vpc_id
@@ -37,9 +37,9 @@ resource "random_integer" "subnet" {
 
 
 module "ec2-app" {
-  source = "../terraform_modules/ec2-instance"
+  source = "./terraform_modules/ec2-instance"
 
-  instance_count         = var.instance_count
+  instance_count         = 2
   name                   = "app-server"
   ami                    = data.aws_ami.ec2_ami.id
   instance_type          = "t2.micro"
@@ -66,42 +66,12 @@ module "ec2-app" {
 }
 
 module "app_svr_role" {
-  source = "../terraform_modules/aws-iam_profile"
+  source = "./terraform_modules/aws-iam_profile"
 
   name     = "app_svr_role"
   policies = ["AmazonSSMManagedInstanceCore"]
 
 }
-
-# resource "aws_iam_role" "app_svr_role" {
-#   name = "app_svr_role"
-
-
-#   assume_role_policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [
-#       {
-#         Action = "sts:AssumeRole"
-#         Effect = "Allow"
-#         Sid    = ""
-#         Principal = {
-#           Service = "ec2.amazonaws.com"
-#         }
-#       },
-#     ]
-#   })
-# }
-
-# resource "aws_iam_role_policy_attachment" "app_svr_role" {
-#   role       = aws_iam_role.app_svr_role.name
-#   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-# }
-
-# resource "aws_iam_instance_profile" "app_svr_profile" {
-#   name = "app_svr_iam_profile"
-#   role = aws_iam_role.app_svr_role.name
-# }
-
 
 
 output "ec2_private_ip" {

@@ -1,5 +1,5 @@
 module "bastian_sg" {
-  source      = "../terraform_modules/aws-sg"
+  source      = "./terraform_modules/aws-sg"
   name        = "bastian-sg"
   description = "bastian host sg"
   vpc_id      = module.vpc.vpc_id
@@ -27,7 +27,7 @@ data "aws_ami" "bastian_ami" {
 
 
 module "bastian" {
-  source = "../terraform_modules/ec2-instance"
+  source = "./terraform_modules/ec2-instance"
 
   instance_count              = 1
   name                        = "bastian"

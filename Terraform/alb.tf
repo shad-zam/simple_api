@@ -1,7 +1,7 @@
 
 
 module "alb_sg" {
-  source      = "../terraform_modules/aws-sg"
+  source      = "./terraform_modules/aws-sg"
   name        = "ALB-sg"
   description = "Load Balancer sg"
   vpc_id      = module.vpc.vpc_id

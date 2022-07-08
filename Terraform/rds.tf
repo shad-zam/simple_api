@@ -1,6 +1,6 @@
 
 module "db_sg" {
-  source      = "../terraform_modules/aws-sg"
+  source      = "./terraform_modules/aws-sg"
   name        = "DB-sg"
   description = "Database sg"
   vpc_id      = module.vpc.vpc_id
@@ -16,7 +16,7 @@ module "db_sg" {
 }
 
 module "mysql" {
-  source                     = "../terraform_modules/rds-db-instance"
+  source                     = "./terraform_modules/rds-db-instance"
   create                     = true
   db_instance_count          = 1
   identifier                 = "swisscom"
