@@ -32,5 +32,6 @@ I have setup an github runner to automate the planning outputs. As this is a lea
 * Run 'terraform init' to innitiate the terraform
 * Run 'terraform plan -out=terraform.provisionplan' eg- $ terraform plan -out=terraform.provisionplan 
 * Run 'terraform apply "terraform.provisionplan" ' This will create the exact same as the plan output which got desplayed.
+* Run 'ansible-playbook -i inventory --private-key <your-ssh-key> application_config.yml'
 
 
